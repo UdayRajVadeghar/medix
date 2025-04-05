@@ -2,11 +2,10 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function POST(request) {
+export async function PUT(request) {
   try {
-    const { medicationId, userId } = await request.json();
+    const { medicationId, name, dosage, frequency, startDate, notes, status, userId } = await request.json();
 
-    console.log(medicationId, userId);
     if (!medicationId || !userId) {
       return Response.json({ error: 'Medication ID and User ID are required' }, { status: 400 });
     }
@@ -21,25 +20,33 @@ export async function POST(request) {
     }
 
     // Verify the medication exists and belongs to the user
-    const medication = await prisma.medication.findFirst({
+    const existingMedication = await prisma.medication.findFirst({
       where: {
         id: medicationId,
         userId: userId
       }
     });
 
-    if (!medication) {
+    if (!existingMedication) {
       return Response.json({ error: 'Medication not found or unauthorized' }, { status: 404 });
     }
 
-    // Delete the medication
-    await prisma.medication.delete({
+    // Update the medication
+    const updatedMedication = await prisma.medication.update({
       where: {
         id: medicationId
+      },
+      data: {
+        name,
+        dosage,
+        frequency,
+        startDate: startDate ? new Date(startDate) : undefined,
+        notes,
+        status
       }
     });
 
-    return Response.json({ message: 'Medication deleted successfully' });
+    return Response.json(updatedMedication);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
