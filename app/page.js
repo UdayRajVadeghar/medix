@@ -55,14 +55,14 @@ export default function Home() {
               Easily track your medications, set reminders, and maintain your health records in one secure place.
             </p>
             <div className="flex space-x-4">
-              {!user && (
+              {(
                 <>
-                  <Link 
+                  {!user && <Link 
                     href="/register" 
                     className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg"
                   >
                     Create Account
-                  </Link>
+                  </Link>}
                   <Link 
                     href="/about" 
                     className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg"
