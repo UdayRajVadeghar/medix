@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Medix - Medication Management System
+
+Medix is a modern web application built with Next.js for managing medications and prescriptions. It provides a user-friendly interface for tracking medications, viewing prescriptions, and managing user accounts.
+
+## Features
+
+- **User Authentication**
+  - Secure login and registration system
+  - JWT-based authentication
+  - Protected routes
+
+- **Medication Management**
+  - Add and track medications
+  - View medication details
+  - Manage prescriptions
+
+- **Modern Tech Stack**
+  - Next.js 15 with App Router
+  - React 19
+  - TailwindCSS for styling
+  - Prisma ORM for database management
+
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js (LTS version)
+- pnpm package manager
+- PostgreSQL database
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd medix
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+   ```
+   DATABASE_URL="your-postgresql-connection-string"
+   JWT_SECRET="your-jwt-secret"
+   ```
+
+4. Initialize the database:
+   ```bash
+   pnpx prisma generate
+   pnpx prisma db push
+   ```
+
+5. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+The application will be available at `http://localhost:3000`
+
+## Project Structure
+
+```
+medix/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   ├── components/        # Reusable components
+│   ├── context/           # React context providers
+│   ├── medication/        # Medication management pages
+│   ├── medicationRead/    # Medication viewing pages
+│   ├── login/            # Authentication pages
+│   └── register/         # User registration pages
+├── prisma/                # Database schema and migrations
+├── public/                # Static assets
+└── ...config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build the application for production
+- `pnpm start` - Start the production server
+- `pnpm lint` - Run ESLint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License - see the LICENSE file for details.
