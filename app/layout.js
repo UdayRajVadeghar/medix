@@ -15,11 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          <header className="bg-white shadow">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-end">
-              <UserGreeting />
-            </div>
-          </header>
+          <UserGreeting />
           <main>{children}</main>
         </SessionProvider>
       </body>
