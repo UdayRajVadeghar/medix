@@ -1,8 +1,19 @@
+'use client';
+
 import Link from "next/link";
+import { useSession } from "./context/SessionContext";
 
 export default function Home() {
+  const { user, loading } = useSession();
 
-  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -13,12 +24,39 @@ export default function Home() {
             </svg>
             <span className="text-2xl font-bold text-gray-900 dark:text-white">MediTrack</span>
           </div>
-          <Link 
-            href="/login" 
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Get Started
-          </Link>
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {user ? (
+              <>
+                <Link 
+                  href="/medicationRead" 
+                  className="hidden sm:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+                >
+                  My Medications
+                </Link>
+                <Link 
+                  href="/medication" 
+                  className="hidden sm:inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
+                >
+                  Add Medication
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link 
+                  href="/login" 
+                  className="bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+                >
+                  Get Started
+                </Link>
+                <Link 
+                  href="/register" 
+                  className="bg-white text-blue-600 border-2 border-blue-600 px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors text-sm sm:text-base"
+                >
+                  Create Account
+                </Link>
+              </>
+            )}
+          </div>
         </header>
 
         <main className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -30,18 +68,22 @@ export default function Home() {
               Easily track your medications, set reminders, and maintain your health records in one secure place.
             </p>
             <div className="flex space-x-4">
-              <Link 
-                href="/register" 
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg"
-              >
-                Create Account
-              </Link>
-              <Link 
-                href="/about" 
-                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg"
-              >
-                Learn More
-              </Link>
+              {!user && (
+                <>
+                  <Link 
+                    href="/register" 
+                    className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg"
+                  >
+                    Create Account
+                  </Link>
+                  <Link 
+                    href="/about" 
+                    className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg"
+                  >
+                    Learn More
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           

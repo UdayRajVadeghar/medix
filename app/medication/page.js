@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useSession } from "../context/SessionContext";
@@ -15,8 +16,7 @@ export default function MedicationPage() {
     notes: '',
     status: 'active'
   });
-
-  
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default function MedicationPage() {
       });
 
       if (response.ok) {
-        router.refresh();
+        setSuccessMessage('Medication added successfully!');
         setFormData({
           name: '',
           dosage: '',
@@ -65,6 +65,20 @@ export default function MedicationPage() {
             <h1 className="text-3xl font-semibold text-gray-900">Add New Medication</h1>
             <p className="mt-2 text-sm text-gray-600">Fill in the details of your medication</p>
           </div>
+
+          {successMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+              <span className="block sm:inline">{successMessage}</span>
+              <div className="mt-4">
+                <Link 
+                  href="/medicationRead" 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                >
+                  View My Medications
+                </Link>
+              </div>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
