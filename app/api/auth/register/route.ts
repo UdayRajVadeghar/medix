@@ -49,8 +49,8 @@ export async function POST(req: Request) {
       { expiresIn: '1h' }
     );
 
-    // Return success response with token
-    return NextResponse.json(
+    // Create the response
+    const response = NextResponse.json(
       {
         message: 'User registered successfully',
         user: {
@@ -58,10 +58,22 @@ export async function POST(req: Request) {
           name: user.name,
           email: user.email,
         },
-        token,
       },
       { status: 201 }
     );
+
+    // Set the JWT token in an HTTP-only cookie
+    response.cookies.set({
+      name: 'token',
+      value: token,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60, // 1 hour in seconds
+      path: '/',
+    });
+
+    return response;
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
