@@ -6,7 +6,7 @@ export async function POST(request) {
   try {
     const { name, dosage, frequency, startDate, notes, status, userId } = await request.json();
     
-    // Check if user exists
+    
     const user = await prisma.user.findUnique({
       where: { id: userId }
     });

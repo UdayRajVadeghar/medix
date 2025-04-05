@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useSession } from "../context/SessionContext";
 
 export default function MedicationPage() {
-  const { session } = useSession();
+  const { user } = useSession();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
@@ -16,18 +16,20 @@ export default function MedicationPage() {
     status: 'active'
   });
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      const response = await fetch('/api/medications', {
+      const response = await fetch('/api/medication/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
-          userId: session?.user?.id,
+          userId: user?.id,
         }),
       });
 
