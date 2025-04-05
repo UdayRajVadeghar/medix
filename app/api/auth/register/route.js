@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-export async function POST(req: Request) {
+export async function POST(req) {
   try {
     const { name, email, password } = await req.json();
 
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
       value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'none',
       maxAge: 60 * 60, // 1 hour in seconds
       path: '/',
     });
