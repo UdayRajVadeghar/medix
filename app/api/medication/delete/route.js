@@ -11,7 +11,6 @@ export async function POST(request) {
       return Response.json({ error: 'Medication ID and User ID are required' }, { status: 400 });
     }
 
-    // Verify the user exists
     const user = await prisma.user.findUnique({
       where: { id: userId }
     });
@@ -20,7 +19,6 @@ export async function POST(request) {
       return Response.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Verify the medication exists and belongs to the user
     const medication = await prisma.medication.findFirst({
       where: {
         id: medicationId,
@@ -32,7 +30,6 @@ export async function POST(request) {
       return Response.json({ error: 'Medication not found or unauthorized' }, { status: 404 });
     }
 
-    // Delete the medication
     await prisma.medication.delete({
       where: {
         id: medicationId

@@ -10,15 +10,12 @@ export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    // Validate input
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
         { status: 400 }
       );
     }
-
-    // Find user in database
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -30,7 +27,6 @@ export async function POST(req) {
       );
     }
 
-    // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return NextResponse.json(
@@ -38,15 +34,12 @@ export async function POST(req) {
         { status: 401 }
       );
     }
-
-    // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    // Create the response
     const response = NextResponse.json({
       message: 'Login successful',
       user: {
@@ -56,14 +49,13 @@ export async function POST(req) {
       },
     });
 
-    // Set the JWT token in an HTTP-only cookie
     response.cookies.set({
       name: 'token',
       value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 1 hour in seconds
+      maxAge: 7 * 24 * 60 * 60 * 1000,
       path: '/',
     });
 

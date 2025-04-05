@@ -9,7 +9,7 @@ export default function LearnMore() {
         
 
         <main className="space-y-16">
-          {/* Hero Section */}
+      
           <section className="text-center space-y-6">
             <h1 className="text-5xl font-bold text-gray-900 dark:text-white">
               Your Personal <span className="text-blue-600">Medication</span> Assistant
@@ -56,8 +56,6 @@ export default function LearnMore() {
               </p>
             </div>
           </section>
-
-          {/* Benefits Section */}
           <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
               Why Choose Medix?
@@ -90,7 +88,6 @@ export default function LearnMore() {
             </div>
           </section>
 
-          {/* CTA Section */}
           <section className="text-center space-y-6">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Ready to Take Control of Your Health?
