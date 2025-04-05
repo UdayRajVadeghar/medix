@@ -22,7 +22,7 @@ export default function UserGreeting() {
       </div>
     );
   }
-  console.log(user);
+  console.log(user.name);
 
   return (
     <div className="flex items-center gap-4">
