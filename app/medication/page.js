@@ -61,9 +61,25 @@ export default function MedicationPage() {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-lg shadow-sm p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-semibold text-gray-900">Add New Medication</h1>
-            <p className="mt-2 text-sm text-gray-600">Fill in the details of your medication</p>
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-900">Add New Medication</h1>
+              <p className="mt-2 text-sm text-gray-600">Fill in the details of your medication</p>
+            </div>
+            <div className="flex space-x-4">
+              <Link 
+                href="/medicationRead" 
+                className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm border border-gray-300"
+              >
+                View Medications
+              </Link>
+              <Link 
+                href="/" 
+                className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm border border-gray-300"
+              >
+                Home
+              </Link>
+            </div>
           </div>
 
           {successMessage && (

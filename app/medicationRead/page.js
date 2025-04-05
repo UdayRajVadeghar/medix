@@ -120,7 +120,21 @@ export default function MedicationReadPage() {
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">My Medications</h1>
+            <div className="flex justify-between items-center mb-4">
+              <button
+                onClick={() => window.location.href = '/'}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors cursor-pointer"
+              >
+                Home
+              </button>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">My Medications</h1>
+              <button
+                onClick={() => window.location.href = '/medication'}
+                className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:outline-none transition-colors cursor-pointer"
+              >
+                Add Medication
+              </button>
+            </div>
             <p className="mt-2 text-sm text-gray-600">View and manage your current medications</p>
           </div>
 
@@ -324,6 +338,20 @@ export default function MedicationReadPage() {
               ))}
             </div>
           )}
+          <div className="mt-8 flex justify-center gap-4">
+            <button
+              onClick={() => window.location.href = '/'}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors cursor-pointer"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => window.location.href = '/medication'}
+              className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:outline-none transition-colors cursor-pointer"
+            >
+              Add Medication
+            </button>
+          </div>
         </div>
       </div>
     </div>
